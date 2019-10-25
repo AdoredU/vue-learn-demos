@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pass Params</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="inputValue"/>
+    <!--@click是v-on:click的简写-->
+    <button @click="handleBtnClick">提交</button>
+    <todo-item v-bind:content="item"
+               v-bind:index="index"
+               v-for="(item, index) in list"
+               v-on:delete="handleItemDelete">  <!--使用v-on:delete监听delete事件，简写为@delete-->
+
+    </todo-item>
+</div>
+
+<script>
+    var TodoItem = {
+        props: ['content', 'index'],
+        // 首先给组件添加点击事件
+        template: '<li @click="handleItemClick">{{content}}</li>',
+        // 需要定义使用的方法
+        methods: {
+            handleItemClick: function () {
+                // 子组件向副组件传值使用$emit来出发事件
+                this.$emit('delete', this.index)  // 点击时触发父组件的delete方法，且把index作为参数传给delete方法
+            }
+        }
+    }
+    var app = new Vue({
+        el: '#app',
+        components: {
+            TodoItem: TodoItem
+        },
+        data: {
+            inputValue: '',
+            list: []
+        },
+        methods: {
+            handleBtnClick: function () {
+                this.list.push(this.inputValue)
+                this.inputValue = ''
+            },
+            handleItemDelete: function (index) {  // 接收参数
+                this.list.splice(index, 1)  // 从index开始删除1个
+            }
+        }
+    })
+</script>
+</body>
+</html>

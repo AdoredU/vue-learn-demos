@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TodoList</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="inputValue" />
+    <!--
+    v-model：双向绑定指令，需要与实例中inputValue对应。input框值变化时，实例中值也变化，相反实例中值改变时，页面展示也会发生变化。
+    可以通过控制台输入 app.$data.inputValue 查看验证。
+     -->
+    <button v-on:click="handleBtnClick">提交</button>
+    <!-- v-on：绑定事件指令 -->
+    <!--v-on:click：绑定点击事件，点击时执行handleBtnClick函数-->
+    <ul>
+        <!--<li>第一课</li>-->
+        <!--<li>第二课</li>-->
+
+        <li v-for="item in list">{{item}}</li>          <!-- 循环指令 -->
+    </ul>
+
+
+</div>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            // list: ['第一课', '第二课'],
+            list: [],
+            inputValue: ''
+        },
+        methods: {
+            handleBtnClick: function () {
+                // alert(this.inputValue)                  // 方法中获取数据，直接使用this.变量名即可
+                this.list.push(this.inputValue)
+                this.inputValue = ''
+            }
+        }
+    })
+</script>
+</body>
+</html>

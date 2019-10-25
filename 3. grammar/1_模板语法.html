@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>template grammar</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    {{content}}    <!-- 插值表达式 -->
+    <!-- v-text指该div内容为content的值，和插值表达式功能一样 -->
+    <div v-text="content"></div>
+    <!-- vue指令后跟的不再是字符串，而是一个js表达式。 -->
+    <div v-text="content+' java'"></div>
+    <!-- v-html不会对内容进行任何处理，因此显示的是html标签效果。v-text会对标签进行转义，标签效果为字符串。-->
+    <div v-html="content"></div>
+    <!-- 鼠标悬停时显示content里面的内容 -->
+    <div v-bind:title="content">hello world</div>
+</div>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            // content: 'hello world'
+            content: '<h3>hello world</h3>'
+        }
+    })
+</script>
+</body>
+</html>
