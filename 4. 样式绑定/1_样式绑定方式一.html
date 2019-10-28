@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>样式绑定</title>
+    <style>
+        .activated {
+            color: red
+        }
+    </style>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--方式一：@class='{类名:变量}'，对象的形式，此时变量值为布尔类型-->
+    <div @click="handleDivClick"
+         v-bind:class="{activated:isActivated}"
+    >
+        hello world
+    </div>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            isActivated: false
+        },
+        methods: {
+            handleDivClick: function () {
+                this.isActivated = !this.isActivated
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列表渲染</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <div v-for="(item, index) of list" :key="item.id">
+        {{item.text}} --- {{index}}
+    </div>
+</div>
+<script>
+    // 直接在控制台以下标形式修改列表不会刷新页面。要想达到数据变页面也改变，有两种方法：
+    // 一：使用变异方法：pop(), push(), shift(), unshift(), splice(), sort(), reverse()
+    // 二：改变数组引用：直接给list重复赋值。
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            list: [
+                {
+                    id: '1001',
+                    text: 'hello'
+                },
+                {
+                    id: '1002',
+                    text: 'world'
+                },
+                {
+                    id: '1003',
+                    text: 'java'
+                }
+            ]
+        }
+    })
+</script>
+</body>
+</html>

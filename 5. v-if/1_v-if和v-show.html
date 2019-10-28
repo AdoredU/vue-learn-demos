@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>条件渲染</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <div v-if="show">{{message}}</div>
+    <div v-show="show">{{message}}</div>
+    <!--区别：v-if决定页面是否加载该元素，而v-show是通过display决定是否显示该元素。如果在切换显示隐藏频繁时，v-show效率更高-->
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            show: false,
+            message: 'Hello World'
+        }
+    })
+</script>
+</body>
+</html>

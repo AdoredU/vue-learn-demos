@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>条件渲染</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <div v-if="show">
+        用户名：<input type="text" key="username">
+    </div>
+    <div v-else>
+        邮箱名：<input type="text" key="email">
+    </div>
+</div>
+<script>
+    // 通过控制台vm.show=false进行测试时，发现input框内容不变，这是由于vue在重复利用元素。给input框加一个唯一的key即可避免此问题
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            show: true
+        }
+    })
+</script>
+</body>
+</html>

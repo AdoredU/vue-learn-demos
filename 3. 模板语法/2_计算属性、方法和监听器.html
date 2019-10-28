@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算属性、方法和监听器</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--计算属性：{{fullName + ' ' + age}}-->
+    <br />
+    <!--方法：{{getFullName() + ' ' + age}}-->
+    <br />
+    监听器：{{fullName}}
+</div>
+<script>
+    // 计算属性有缓存机制，当计算属性的值不变时，页面重新加载也不会再次执行计算，和监听器类似。而使用方法则再每次重新
+    // 加载页面都要执行方法里内容。
+    var app = new Vue({
+        el: '#app',
+        data: {
+            firstName: 'Will',
+            lastName: 'Smith',
+            age: 28,
+            fullName: 'Will Smith'
+        },
+        // computed: {
+        //     fullName: function () {
+        //         console.log('计算了一次。')
+        //         return this.firstName + ' ' + this.lastName
+        //     }
+        // },
+        // methods: {
+        //     getFullName: function () {
+        //         console.log('计算了一次。')
+        //         return this.firstName + ' ' + this.lastName
+        //     }
+        // }
+        watch: {
+            // 监听firstName
+            firstName: function () {
+                console.log('计算了一次。')
+                this.fullName = this.firstName + ' ' + this.lastName
+            },
+            // 监听lastName
+            lastName: function () {
+                console.log('计算了一次。')
+                this.fullName = this.firstName + ' ' + this.lastName
+            }
+        }
+    })
+</script>
+</body>
+</html>

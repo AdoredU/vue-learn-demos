@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列表渲染</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--用of更接近js迭代器语法-->
+    <!--循环体还可以以(内容,下标)形式接收-->
+    <!--为提高循环性能，一般给循环增加key，key必须唯一，不推荐使用index，性能不好，一般使用后端返回的id-->
+    <div v-for="(item, index) of list" :key="item.id">
+        {{item.text}} --- {{index}}
+    </div>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            list: [
+                {
+                    id: '1001',
+                    text: 'hello'
+                },
+                {
+                    id: '1002',
+                    text: 'world'
+                },
+                {
+                    id: '1003',
+                    text: 'java'
+                }
+            ]
+        }
+    })
+</script>
+</body>
+</html>

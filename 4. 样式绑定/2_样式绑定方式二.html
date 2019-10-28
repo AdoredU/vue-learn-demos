@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>样式绑定</title>
+    <style>
+        .activated {
+            color: red
+        }
+    </style>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--方式二：@class='[变量]'，数组的形式，此时变量值为类名-->
+    <div @click="handleDivClick"
+         v-bind:class="[activated]"
+    >
+        hello world
+    </div>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            activated: ''
+        },
+        methods: {
+            handleDivClick: function () {
+                /*if (this.activated === 'activated') {
+                    this.activated = ''
+                } else {
+                    this.activated = 'activated'
+                }*/
+                // 三元表达式简写
+                this.activated = this.activated === 'activated'?'':'activated'
+            }
+        }
+    })
+</script>
+</body>
+</html>

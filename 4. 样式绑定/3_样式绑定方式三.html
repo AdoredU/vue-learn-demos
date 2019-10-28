@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>样式绑定</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--同class类似，此处也可以用列表形式，列表时可以放多个。注意fontSize用驼峰形式-->
+    <div @click="handleDivClick"
+         :style="[styleObj, {fontSize: '20px'}]"
+    >
+        Hello World
+    </div>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            styleObj: {
+                color: 'black'
+            }
+        },
+        methods: {
+            handleDivClick: function () {
+                this.styleObj.color = this.styleObj.color === 'red' ? 'black' : 'red';
+            }
+        }
+    })
+</script>
+</body>
+</html>
