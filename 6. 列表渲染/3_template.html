@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>template</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--当循环内有多个元素时，可以在外面包一层-->
+    <div v-for="(item, index) of list" :key="index">
+        <div>
+            {{index}} --- {{item}}
+        </div>
+        <span>{{item}}</span>
+    </div>
+    <!--但这样页面外面的一层div也会作为元素，此时可以使用template作为占位标签，不会在页面存在-->
+    <!--注意：template是不能使用:key的，会报错：<template> cannot be keyed. Place the key on real elements instead.-->
+    <template v-for="(item, index) of list">
+        <div>
+            {{index}} --- {{item}}
+        </div>
+        <span>{{item}}</span>
+    </template>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            list: [
+                'hello',
+                'world',
+                'java',
+                'python'
+            ]
+        }
+    })
+</script>
+</body>
+</html>

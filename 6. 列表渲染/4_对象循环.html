@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>对象循环</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <div v-for="(item, key, index) of userInfo">
+        {{index}} --- {{key}}: {{item}}
+    </div>
+</div>
+<script>
+    // 同列表类似，对象循环通过键值操作元素不会引起页面重新渲染，可以直接修改对象的引用：
+    // vm.userInfo = {name: 'Will' ....}
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            userInfo: {
+                name: 'Will',
+                age: 28,
+                gender: false
+            }
+        }
+    })
+</script>
+</body>
+</html>

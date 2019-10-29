@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改对象</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <div v-for="(item, key, index) of userInfo">
+        {{key}}: {{item}}
+    </div>
+</div>
+<script>
+    // 除改变对象引用能够导致页面重新加载时，还可以通过set方法。
+    // Vue.set(vm.userInfo, 'address', 'bj')
+    // 也可以通过实例的set方法：
+    // vm.$set(vm.userInfo, 'address', 'bj')
+    // 注意：数组也可以通过set方法修改，实现页面实时加载。
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            userInfo: {
+                name: 'Will',
+                age: 28,
+                gender: false
+            }
+        }
+    })
+</script>
+</body>
+</html>

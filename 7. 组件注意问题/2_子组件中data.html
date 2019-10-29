@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>子组件中data</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <li is="row"></li>
+        <li is="row"></li>
+        <li is="row"></li>
+    </ul>
+</div>
+<script>
+    // 除根组件外，子组件中定义数据不能直接使用'data：对象'，必须以函数的形式定义，且返回数据对象。这是因为
+    // 子组件会被使用多次，这样可以确保多次使用的数据不会发生问题。
+    Vue.component('row', {
+        template: '<li>{{content}}</li>',
+        data: function () {
+            return {
+                content: 'this is a line'
+            }
+        }
+    })
+    var vm = new Vue({
+        el: '#app',
+    })
+</script>
+</body>
+</html>
