@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>插槽（slot）</title>
+    <script src="../static/js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--父组件使用子组件时，有时在子组件本身外还要包含其它元素，此时使用slot，可以理解为提前占位。-->
+    <child>
+        <h1 slot="header">Header</h1>
+        <p slot="footer">footer</p>
+    </child>
+</div>
+<script>
+    Vue.component('child', {
+        template: `<div>
+                        <slot name="header">Default Content</slot>
+                        <p>Hello</p>
+                        <slot name="footer">Default Content</slot>
+                   </div>`
+    })
+    var vm = new Vue({
+        el: '#app',
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>同时使用过渡和animate库</title>
+    <link rel="stylesheet" href="../static/css/animate.css">
+    <script src="../static/js/vue.js"></script>
+    <style>
+        .fade-enter, .fade-leave-to {
+            opacity: 0;
+        }
+        .fade-enter-active, .fade-leave-active {
+            transition: opacity 3s;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <!--既使用animate又使用过渡时，在enter-active-class中加入fade-enter-active，并添加style样式-->
+    <!--过渡和animate时长不一样时，使用type决定以哪个为准，如：   type="transition" 表示以过渡事件为准-->
+    <!--也可以自定义执行时长，通过:duration定义，如：  :duration="5000"  注意单位是毫秒-->
+    <!--duration还可以更复杂使用，如：   :duration="{enter: 5000, leave: 3000}"  表示显示和隐藏时时长-->
+    <transition name="fade"
+                type="transition"
+                appear
+                enter-active-class="animated swing fade-enter-active"
+                leave-active-class="animated shake fade-leave-active"
+                appear-active-class="animated swing"
+    >
+        <div v-show='show'>Hello</div>
+    </transition>
+    <button @click="handleClick">toggle</button>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            show: true
+        },
+        methods: {
+            handleClick: function () {
+                this.show = !this.show
+            }
+        }
+    })
+</script>
+</body>
+</html>

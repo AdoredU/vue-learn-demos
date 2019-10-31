@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件绑定原生事件</title>
+    <script src="../static/js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--直接在组件上使用@click等不会作为原生click事件响应处理，而是作为自定义事件。此时要想起作用需要通过
+    子组件的$emit触发。
+    如果想作为原生事件在子组件上，使用.native指明-->
+    <!--<child @click="handleClick"></child>-->
+    <child @click.native="handleClick"></child>
+</div>
+<script>
+    Vue.component('child', {
+        // template: '<div @click="handleDivClick">Child</div>',  // 在dom元素上使用@click才会作为原生事件响应
+        template: '<div>Child</div>',  // 在dom元素上使用@click才会作为原生事件响应
+        // methods: {
+        //     handleDivClick: function () {
+        //         alert('child click');
+        //         // this.$emit('click')
+        //     }
+        // }
+    })
+    var vm = new Vue({
+        el: '#app',
+        methods: {
+            handleClick: function () {
+                alert('click')
+            }
+        }
+    })
+</script>
+</body>
+</html>

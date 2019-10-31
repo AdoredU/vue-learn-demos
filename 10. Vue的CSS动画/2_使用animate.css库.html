@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用animate.css库</title>
+    <script src="../static/js/vue.js"></script>
+    <style>
+
+        @keyframes bounce-in{
+
+            0% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.5);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        .fade-enter-active, .enter {
+            transform-origin: left center;
+            animation: bounce-in 1s;
+        }
+        .fade-leave-active, .leave {
+            transform-origin: left center;
+            animation: bounce-in 1s reverse;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <!--keyframes是CSS3动画，起名bounce-in-->
+    <!--如果想使用自定义类名，而不是默认的name-enter, name-enter-to等，属性形式指定-->
+    <transition name="fade" enter-active-class="enter" leave-active-class="leave">
+        <div v-if="show">Hello World</div>
+    </transition>
+    <button @click="handleClick">切换</button>
+</div>
+<script>
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            show: true
+        },
+        methods: {
+            handleClick: function () {
+                this.show = !this.show
+            }
+        }
+    })
+</script>
+</body>
+</html>

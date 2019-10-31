@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>多个元素或组件的过渡</title>
+    <script src="../static/js/vue.js"></script>
+    <style>
+        .v-enter, .v-leave-to {
+            opacity: 0;
+        }
+        .v-enter-active, .v-leave-active {
+            transition: opacity 2s;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <!--可以设置属性为in-out或者out-in来确认元素进出顺序（显示隐藏顺序）-->
+    <transition mode="out-in">
+        <div v-if="show" key="hello" v-once>Hello world</div>
+        <div v-else key="bye" v-once>Bye world</div>
+    </transition>
+        <button @click="handleClick">toggle</button>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            show: true
+        },
+        methods: {
+            handleClick: function () {
+                this.show = !this.show
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue中的JS动画</title>
+    <script src="../static/js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <transition @before-enter="handleBeforeEnter"
+                @enter="handleEnter"
+                @after-enter="handleAfterEnter"
+                @before-leave="handleBeforeLeave"
+                @leave="handleLeave"
+                @after-leave="handleAfterLeave"
+    >
+        <div v-show="show">Hello</div>
+    </transition>
+    <button @click="handleClick">Toggle</button>
+</div>
+<script>
+    // js实现动画通过钩子函数实现
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            show: true
+        },
+        methods: {
+            handleClick: function () {
+                this.show = !this.show
+            },
+            handleBeforeEnter: function (el) {
+                el.style.color = 'red'
+            },
+            handleEnter: function (el, done) {
+                setTimeout(()=>{
+                    el.style.color = 'green'
+                }, 2000)
+                setTimeout(()=>{
+                    done()  // done后才会触发after-enter
+                }, 4000)
+            },
+            handleAfterEnter: function (el) {
+                el.style.color = "#000"
+            },
+            handleBeforeLeave: function (el) {
+                console.log('before leave')
+            },
+            handleLeave: function (el, done) {
+                console.log('leave')
+                done()
+            },
+            handleAfterLeave: function (el) {
+                console.log('left')
+            }
+        }
+    })
+</script>
+</body>
+</html>

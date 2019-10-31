@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS动画原理</title>
+    <script src="../static/js/vue.js"></script>
+    <style>
+        .fade-enter, .fade-leave-to {
+            opacity: 0;
+        }
+        .fade-enter-active, .fade-leave-active {
+            transition: opacity 1s;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <!--如果想让一个元素有过度的动画效果，用transition标签包住-->
+    <!--transition内容显示时，为第一帧添加两个类名：fade-enter和fade-enter-active;-->
+    <!--第二帧时，去除fade-enter类，添加fade-enter-to类-->
+    <!--最后时，去除fade-active类和fade-enter-to类-->
+
+    <!--
+    同样的，隐藏时，分别变化fade-leave、fade-leave-active、fade-leave-to三个类
+    -->
+
+    <!--通过v-if或者v-show或者动态组件的，添加transition可以添加过度动画-->
+    <transition name="fade">  <!--名字随便取，默认为v，对应v-enter，v-enter-to等-->
+        <child v-if="show"></child>
+    </transition>
+    <button @click="handleClick">切换</button>
+</div>
+<script>
+    Vue.component('child', {
+        template: '<div>Hello World</div>'
+    })
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            show: true
+        },
+        methods: {
+            handleClick: function () {
+                this.show = !this.show
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用animate.css库</title>
+    <link rel="stylesheet" href="../static/css/animate.css">
+    <script src="../static/js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--既然可以自定义transition类名，那么可以直接使用animation.css-->
+    <!--使用animate不用再自定义样式，自定义类名中包含animated，然后添加选择的样式类名-->
+    <!--如果要在页面第一次加载时就有enter的动画效果，添加appear和appear-active-class-->
+    <transition name="fade"
+                appear
+                enter-active-class="animated bounceInUp"
+                leave-active-class="animated bounceOutUp"
+                appear-active-class="animated bounceInUp"
+    >
+        <div v-if="show">Hello World</div>
+    </transition>
+    <button @click="handleClick">切换</button>
+</div>
+<script>
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            show: true
+        },
+        methods: {
+            handleClick: function () {
+                this.show = !this.show
+            }
+        }
+    })
+</script>
+</body>
+</html>

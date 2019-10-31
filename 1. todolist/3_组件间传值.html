@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Pass Params</title>
-    <script src="../js/vue.js"></script>
+    <script src="../static/js/vue.js"></script>
 </head>
 <body>
 <div id="app">
@@ -19,6 +19,7 @@
 </div>
 
 <script>
+    // 总结：父组件给子组件传值通过属性的形式，子组件给父组件传值通过触发事件的方式。
     var TodoItem = {
         props: ['content', 'index'],
         // 首先给组件添加点击事件

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动态组件</title>
+    <script src="../static/js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--<child-one v-if="type == 'child-one'"></child-one>-->
+    <!--<child-two v-if="type == 'child-two'"></child-two>-->
+    <!--使用component动态组件-->
+    <component :is="type"></component>
+    <button @click="handleClick">Change</button>
+</div>
+<script>
+    // toggle切换组件，底层每次都会销毁和创建组件，耗费性能。
+    // v-once指令会将组件保存至内存里，这样尤其在二者切换时大大节省性能。
+    Vue.component('child-one', {
+        template: '<div v-once>Child-One</div>'
+    })
+    Vue.component('child-two', {
+        template: '<div v-once>Child-Two</div>'
+    })
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            type: 'child-one'
+        },
+        methods: {
+            handleClick: function () {
+                this.type = this.type === 'child-one'?'child-two':'child-one'
+            }
+        }
+    })
+</script>
+</body>
+</html>

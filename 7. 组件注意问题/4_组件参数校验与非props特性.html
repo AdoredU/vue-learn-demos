@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件参数校验与非props特性</title>
+    <script src="../static/js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--
+    注意：
+    一：父组件通过属性传递值时，不带v-bind（或者：）时引号中字符串就是传递的字符串参数；
+    二：如果带v-bind，引号中为数字时，传递的是数字；引号中为字符串时，作为变量名。（即引号中是js表达式）
+    -->
+    <child content="hello world"></child>
+</div>
+<script>
+    // 非props特性：
+    // 一：子组件未接收参数时，使用时报错（无法使用）；
+    // 二：页面中属性会显示在dom元素中（如果接收则不显示为标签属性）。
+    Vue.component('child', {
+        // props: ['content'],
+        // 如果要对父组件所传参数进行限定，要使用对象的形式
+        props: {
+            // content: Number
+            // content: [String, Number]  // 多种类型使用数组
+            // 要做更多限定时，以对象形式：
+            content: {
+                type: String, // type指定类型
+                required: false, // 指定是否必传
+                default: 'hello', // 指定默认值
+                validator: function (value) {  // validator为一个方法，参数为实际值
+                    return value.length > 5  // return true校验通过，否则为参数不合法
+                }
+            }
+        },
+        template: '<div>{{content}}</div>'
+    })
+    var vm = new Vue({
+        el: '#app',
+    })
+</script>
+</body>
+</html>
